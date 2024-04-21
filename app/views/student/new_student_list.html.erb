@@ -1,0 +1,53 @@
+<div class="pagetitle">
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Students</a></li>
+            <li class="breadcrumb-item active">New list</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+ <% if notice.present? %>
+    <p class="py-2 px-3 text-warning" id="notice"><%= notice %></p>
+  <% end %>
+<div class="row main-section dashboard">
+  <!-- Left side columns -->
+  <div class="col-lg-6 left-column">
+        <div class="row">
+        <!-- Revenue Card -->
+        <div class="col-xxl-12 col-md-12">
+            <div class="info-card revenue-card">
+            <div class="target">
+                <h2 class= "font-bold " >Please list details</h2>
+            </div>
+            <div class="card-body">
+                <%= form_with url: create_student_list_path, method: :post do |form| %>
+                    <div class= "my-5" >
+                        <%= form.label :name , 'UNIVERSITY:' %>
+                        <%= form.select :location, options_for_select((Location.all).to_a.map{ |val| [val.name,val.id] }) %>
+                    </div>
+
+                    <div class= "my-5" >
+                        <%= form.label :location , 'UNIVERSITY:' %>
+                        <%= form.select :academic_year, options_for_select((AcademicYear.all).to_a.map{ |val| [val.name,val.id] }) %>
+                    </div>
+
+                    <div class= "my-5" >
+                        <%= form.label :File, 'Student list:' %>
+                        <%= form.file_field :file, accept: ".xlsx"  %>
+                    </div>
+                    <div class= "my-5" >
+                        <%= form.label :File, 'Student list:' %>
+                        <%= form.file_field :uploaded_file, accept: ".zip" %>
+                    </div>
+
+                    <div class= "actions" >
+                    <%= form.submit "Upload" %>
+                    </div>
+                <% end %>
+            </div>
+            </div>
+        </div><!-- End Revenue Card -->
+        </div>
+   </div>
+</div>

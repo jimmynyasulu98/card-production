@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cover: one
+  location: one
+  date_joined: 2024-04-08
+  date_of_expiry: 2024-04-08
+
+two:
+  cover: two
+  location: two
+  date_joined: 2024-04-08
+  date_of_expiry: 2024-04-08

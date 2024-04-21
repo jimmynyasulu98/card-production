@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Covers</h1>
+
+<div id="covers">
+  <% @covers.each do |cover| %>
+    <%= render cover %>
+    <p>
+      <%= link_to "Show this cover", cover %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New cover", new_cover_path %>

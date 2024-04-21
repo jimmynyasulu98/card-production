@@ -1,0 +1,40 @@
+<div id="<%= dom_id member %>">
+  <p>
+    <strong>First name:</strong>
+    <%= member.first_name %>
+  </p>
+
+  <p>
+    <strong>Last name:</strong>
+    <%= member.last_name %>
+  </p>
+
+  <p>
+    <strong>Date of birth:</strong>
+    <%= member.date_of_birth %>
+  </p>
+
+  <p>
+    <strong>Date joined:</strong>
+    <%= member.date_joined %>
+  </p>
+
+  <p>
+    <strong>Cover:</strong>
+    <%= member.cover_id %>
+  </p>
+
+  <p>
+    <strong>Location:</strong>
+    <%= member.location_id %>
+  </p>
+  <p >
+    <strong>File :</strong>
+    <% if member.image %>
+      <%= image_tag member.image_url  , class: "new_user_thumbnail" %>
+    <% end %>
+  </p>
+
+
+
+</div>
