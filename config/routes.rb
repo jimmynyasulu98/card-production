@@ -9,7 +9,11 @@ Rails.application.routes.draw do
 
 
   root "members#new"
-  get 'student/index'
+  get 'student/select-list', to: 'student#index' , as: :select_student_list
+  post 'student/select-list', to: 'student#select_student_list', as: :student_list
+  get 'student/select-student', to: 'student#index'
+  post 'student/select-student', to: 'student#select_student',as: :select_student
+
   get 'student/new_student_list'
   post 'student/create_student_list', as: :create_student_list
 end

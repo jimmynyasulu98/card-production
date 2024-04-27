@@ -345,16 +345,15 @@ h6 {
   color: #2c384e;
 }
 
-.nav-tabs-bordered .nav-link:hover,
-.nav-tabs-bordered .nav-link:focus {
-  color: #4154f1;
+.student-list-seach{
+  border: 1px solid #1158e6;
+  padding: 1px 3px 1px 3px;
+  margin-bottom: 2px;
+  background-color: #2e74ee;
+  border-radius: 6px;
+  color: white;
 }
 
-.nav-tabs-bordered .nav-link.active {
-  background-color: #fff;
-  color: #4154f1;
-  border-bottom: 2px solid #4154f1;
-}
 
 /*--------------------------------------------------------------
 # Header
@@ -1236,4 +1235,9 @@ h6 {
   text-align: center;
   font-size: 13px;
   color: #012970;
+}
+
+
+.students-listing{
+  font-size: small;
 }

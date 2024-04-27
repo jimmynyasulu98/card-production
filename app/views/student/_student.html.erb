@@ -1,0 +1,17 @@
+<tr>
+    <td><%= student.member.first_name %></td>
+    <td><%= student.member.last_name %></td>
+    <td><%= student.member.membership_number %></td>
+    <td><%= student.member.date_of_birth %></td>
+    <td><%= student.member.first_name %></td>
+    <td>
+
+        <% button_to select_student_path, class: "fa fa-edit fa-2x" %>
+        <%= button_to select_student_path(),params:{id: student.member.id }, class:"btn btn-outline-primary" do %>
+            <i class="fa fa-print "></i>
+        <% end %>
+         <%= link_to edit_member_path(student.member.id), class:"btn btn-outline-primary" do %>
+            <i class="fa fa-edit "></i>
+        <% end %>
+    </td>
+</tr>

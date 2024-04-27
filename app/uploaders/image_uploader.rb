@@ -2,7 +2,7 @@
 require "image_processing/mini_magick"
 class ImageUploader < Shrine
   include ImageProcessing::MiniMagick
-  Shrine.plugin :derivatives
+
 
 
 

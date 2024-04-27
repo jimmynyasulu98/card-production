@@ -1,0 +1,61 @@
+<div class="section" >
+    <h5 class= "card-cover text-uppercase" ><%= card&.cover&.name%> COVER</h5>
+    <h6 class= "front-first-paragraph" >
+        Always quote the membership number in all correspondence
+        with the SCHEME
+    </h6>
+    <p class= "front-second-paragraph" >
+        on claim forms always quote Membership Number <br> and date of birth of patient
+    </p>
+    <div class="id-number-area">
+    <p class="label">Membership <br> Number</p>
+    <span>&#10148;</span>
+
+    <input type="text" value=<%=student&.member&.membership_number%> class="id-number-input" disabled>
+
+    </div>
+    <div class="profile-row">
+        <% if student&.member&.image %>
+        <%= image_tag student.member.image_url  , class: " id-photo" %>
+        <% else %>
+        <img src="" class="id-photo">
+        <% end %>
+    <ul class="profile-fields">
+        <li class="list-item">
+        <h6 class="id-label">Surname  &#x3A;</h6>
+        <h6 class="id-value "><%= student&.member&.last_name %></h6>
+        </li>
+        <li class="list-item">
+        <h6 class="id-label ">first name  &#x3A;</h6>
+        <h6 class="id-value "><%= student&.member&.first_name %></h6>
+        </li>
+        <li class="list-item">
+        <h6 class="id-label">Date of birth &#x3A;</h6>
+        <h6 class="id-value "><%= student&.member&.date_of_birth %></h6>
+        </li>
+        <li class="list-item">
+        <h6 class="id-label">Date Joined  &#x3A;</h6>
+        <h6 class="id-value bank-bothic"><%= card&.date_of_expiry %></h6>
+        </li>
+        <li class="list-item">
+        <h6 class="id-label">Date Of Expiry  &#x3A;</h6>
+        <h6 class="id-value bank-bothic"><%= card&.date_of_expiry %></h6>
+        </li>
+        <li class="list-item">
+        <h6 class="id-label">Location  &#x3A;</h6>
+        <h6 class="id-value bank-bothic"><%= card&.location&.name %></h6>
+        </li>
+    </ul>
+    </div>
+    <div class="footer-area">
+    <p class="holders-signature">HOLDERS SIGNATURE</p>
+    <div class="signature-area">
+        <%= image_tag image_path('signature.jpg')   , class: "signature-photo" %>
+        <p  class="on-behalf-signature" >
+            FOR AND ON BEHALF OF THE SCHEME
+        </p>
+    </div>
+    </div>
+
+</div>
+

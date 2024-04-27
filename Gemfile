@@ -86,3 +86,4 @@ gem 'mini_magick', '~> 4.5', '>= 4.5.1'
 #for csv parsing
 
 gem 'creek'
+gem 'hotwire-rails'

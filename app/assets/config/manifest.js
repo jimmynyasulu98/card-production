@@ -6,3 +6,5 @@
 //= link vendor/simple-datatables/simple-datatables.js
 //= link vendor/tinymce/tinymce.min.js
 //= link_tree ../fonts
+//= link signature.jpg
+//= link UnimaLogo.png

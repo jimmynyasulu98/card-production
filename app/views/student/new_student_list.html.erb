@@ -28,7 +28,7 @@
                     </div>
 
                     <div class= "my-5" >
-                        <%= form.label :location , 'UNIVERSITY:' %>
+                        <%= form.label :location , 'ACADEMIC YEAR:' %>
                         <%= form.select :academic_year, options_for_select((AcademicYear.all).to_a.map{ |val| [val.name,val.id] }) %>
                     </div>
 
