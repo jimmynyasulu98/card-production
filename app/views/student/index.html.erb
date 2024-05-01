@@ -23,80 +23,51 @@
                                     <%= form.select :academic_year,
                                     options_for_select((AcademicYear.all).to_a.map{ |val| [val.name,val.id] }) %>
                                 </li>
-                                <li class="breadcrumb-item"><%= form.submit "Search Cohort", class: "student-list-seach"%></li>
+                                <li class="breadcrumb-item"><%= form.submit "Search Cohort", class: "student-list-seach", data: { turbo: false }%></li>
+
                             </ol>
                         <% end %>
                     </nav>
                     <!-- Table with stripped rows -->
-                    <table class="table datatable students-listing py-0">
+                    <div class= "table-responsive" >
+                        <div > <%= render partial: 'new', locals: { student: @time } %></div>
+
+                    <table class="table datatable students-listing py-0  ">
                         <thead>
                         <tr>
+                            <th>
+                             No
+                            </th>
                             <th>
                              First Name(s)
                             </th>
                             <th>Surname</th>
                             <th>ID No.</th>
                             <th data-type="date" data-format="YYYY/DD/MM">Date of Birth</th>
-                            <th>Photo Id</th>
                             <th>Action</th>
                         </tr>
                         </thead>
-                        <tbody>
-                            <% @students.each do |student| %>
-                                <%= render partial: 'student', locals: { student: student } %>
+                        <tbody >
+                            <% @students.each_with_index do |student, index| %>
+                                <%= render partial: 'student', locals: { student: student,
+                                    index: index,fade_in:false } %>
                             <% end %>
                         </tbody>
                     </table>
-                </div>
-                </div>
-            </div><!-- End Revenue Card -->
-
-            <!-- Recent Sales -->
-            <div class="col-12">
-                <div class="card recent-sales overflow-auto">
-
-                    <div class="filter">
-                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-
-                        </ul>
                     </div>
-
-                    <div class="card-body">
-                        <h5 class="card-title">Recent Sales <span>| Today</span></h5>
-
-                        <table class="table table-borderless datatable">
-                        <thead>
-                            <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Customer</th>
-                            <th scope="col">Product</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                            <th scope="row"><a href="#">#2457</a></th>
-                            <td>Brandon Jacob</td>
-                            <td><a href="#" class="text-primary">At praesentium minu</a></td>
-                            <td>$64</td>
-                            <td><span class="badge bg-success">Approved</span></td>
-                            </tr>
-                        </tbody>
-                        </table>
-
-                    </div>
-
                 </div>
-            </div><!-- End Recent Sales -->
+                </div>
+            </div><!-- Students list -->
+
+
         </div>
     </div><!-- End Left side columns -->
 
   <!-- Right side columns -->
   <div class="col-lg-4 right-column" >
     <!-- Card  Section -->
-        <%= render partial:"members/card_section" , locals: { student: @student, card: @card   }  %>
+        <%= render partial:"members/card_section" , locals: { student: @student, card: @card }  %>
+        <%= button_tag "preview card" , id:"preview-card" ,class:"btn btn-primary my-2" %>
     <!-- Card Section -->
   </div>
   <!-- End Right side columns -->

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_21_191034) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_28_183018) do
   create_table "academic_years", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -52,6 +52,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_21_191034) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "image_data"
+    t.boolean "card_printed", default: false
     t.index ["cover_id"], name: "index_members_on_cover_id"
     t.index ["location_id"], name: "index_members_on_location_id"
   end

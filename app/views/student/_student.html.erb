@@ -1,17 +1,29 @@
-<tr>
+
+<% if fade_in    %>
+    <tr class= "student-highlight" id = "student_<%=student.member.id %>">
+<% else %>
+    <tr id = "student_<%=student.member.id %>">
+<% end %>
+    <td><%= index.to_i+1 %></td>
     <td><%= student.member.first_name %></td>
     <td><%= student.member.last_name %></td>
-    <td><%= student.member.membership_number %></td>
+    <td><%= link_to student.member.membership_number ,edit_member_path(student.member.id),class:"text-primary mx-1" %></td>
     <td><%= student.member.date_of_birth %></td>
-    <td><%= student.member.first_name %></td>
-    <td>
+    <td class="d-flex">
 
-        <% button_to select_student_path, class: "fa fa-edit fa-2x" %>
-        <%= button_to select_student_path(),params:{id: student.member.id }, class:"btn btn-outline-primary" do %>
-            <i class="fa fa-print "></i>
+        <% if student.member.card_printed %>
+            <%= button_to select_student_path(),params:{id: student.member.id }, class:"btn btn-outline-primary student-select mx-1" do %>
+                <i class="fa fa-print mb-3"></i>
+            <% end %>
+        <% else%>
+            <%= button_to select_student_path(),params:{id: student.member.id}, class:"btn btn-outline-danger student-select mx-1", data: {turbo_stream: true} do %>
+                <i class="fa fa-print mb-3"></i>
+            <% end %>
         <% end %>
-         <%= link_to edit_member_path(student.member.id), class:"btn btn-outline-primary" do %>
-            <i class="fa fa-edit "></i>
+
+        <%= button_to  mark_printed_manual_path(),params:{id: student.member.id, index: index  }, class:"btn btn-outline-dark student-select", data: {turbo_stream: true} do %>
+                <i class="fa fa-print mb-3"></i>
         <% end %>
+
     </td>
 </tr>

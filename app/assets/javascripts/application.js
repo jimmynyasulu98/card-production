@@ -5,6 +5,7 @@
 //= require print
 
 
+
 $(document).on('change', 'input[type="file"]' ,function(event) {
     var obj_custom = this;
     var files = event.target.files;
@@ -18,3 +19,16 @@ $(document).on('change', 'input[type="file"]' ,function(event) {
     }
     reader.readAsDataURL(image);
   });
+
+
+window.onafterprint = function() {
+  $.ajax({
+    type: "POST",
+    url: "mark-printed",
+    data :  document.cookie,
+
+  });
+};
+
+import "@hotwired/turbo-rails"
+import "./controllers"

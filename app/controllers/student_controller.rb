@@ -1,9 +1,11 @@
 class StudentController < ApplicationController
+  protect_from_forgery with: :null_session
   require 'csv'
   require 'creek'
   require 'zip'
   require 'fileutils'
   before_action :set_card, only: %i[index select_student_list select_student ]
+
 
 
   def index
@@ -34,7 +36,6 @@ class StudentController < ApplicationController
     end
 
     cover = Cover.find_by(name: "Student").id
-    location = Location.find(params[:location])
 
     creek = Creek::Book.new(file)
     sheet = creek.sheets[0]
@@ -63,19 +64,66 @@ class StudentController < ApplicationController
   end
 
   def select_student_list
+    @time = Time.now
     @students = StudentAcademicYear.where(academic_year_id:params[:academic_year], location_id:params[:location])
     render :index
   end
 
   def select_student
-    @student = StudentAcademicYear.find_by(member_id:params[:id])
-    @students = StudentAcademicYear.where(academic_year_id:@student.academic_year_id,location_id:@student.location_id)
-
-    render :index
+    @time = Time.now
+    respond_to do |format|
+      @student = StudentAcademicYear.find_by(member_id:params[:id])
+      #setting student id into session cookie to be accessed in AJAX call
+      cookies[:student] = @student.member_id
+      #@students = StudentAcademicYear.where(academic_year_id:@student.academic_year_id,location_id:@student.location_id)
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace( :card_section , partial:"members/card_section" ,locals: { student: @student, card: @card   } )
+      end
+      format.html { render :index }
+    end
   end
+
+  def mark_printed_manual
+
+    member = Member.find(params[:id])
+    member.card_printed = true
+    member.save
+    @student = StudentAcademicYear.find_by(member_id:params[:id])
+    @time = Time.now
+
+    respond_to do |format|
+
+      format.turbo_stream do
+        render  turbo_stream: turbo_stream.replace(:"student_#{@student.member_id}" ,
+          partial: 'student', locals: { student: @student, index: params[:index], fade_in: true } )
+      end
+      format.html { render :index }
+    end
+
+  end
+
+  def mark_printed
+    member = Member.find(params[:csrftoken].split('student=')[1])
+    member.card_printed = true
+    member.save
+    @student = StudentAcademicYear.find_by(member_id: params[:csrftoken].split('student=')[1])
+    @time = Time.now
+
+    respond_to do |format|
+
+      format.turbo_stream do
+        puts "oksu"
+        render  turbo_stream: turbo_stream.replace(:new , partial: 'new', locals: { student: @time } )
+      end
+      format.html { render :index }
+    end
+
+  end
+
 
   private
   # Use callbacks to share common setup or constraints between actions.
+
   def set_card
     @card = Card.first()
   end

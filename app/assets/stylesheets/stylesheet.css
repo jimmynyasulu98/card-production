@@ -1239,5 +1239,39 @@ h6 {
 
 
 .students-listing{
-  font-size: small;
+  font-size: 10px;
+  font-weight: bolder;
 }
+
+.student-select{
+  height: 30px;
+  width: 30px;
+  padding-left: 4px;
+}
+
+.table-responsive {
+  max-height:400px;
+}
+
+.dataTables_filter {
+  width: 50%;
+  float: right;
+  text-align: right;
+  position: static;
+}
+
+
+
+@keyframes student-highlight {
+  0% {
+  background: #8f8;
+  opacity: 0;
+  }
+  100% {background: none;
+    opacity: 1;
+  }
+  }
+
+.student-highlight{
+  animation: student-highlight 2s;
+  }
