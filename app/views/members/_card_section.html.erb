@@ -1,13 +1,11 @@
 
-  <article class = "article col-md-10 justify-content-center" id = "card_section">
+<article class = "article col-md-10 justify-content-center" id = "card_section">
+  <section class = "row-section">
+    <%= render partial:"members/card_front" , locals: { member: member, card: card   }  %>
+  </section>
 
-    <section class = "row-section">
-      <%= render partial:"members/card_front" , locals: { student: student, card: card   }  %>
-    </section>
-
-    <section class = "row-section">
-      <%= render partial:"members/card_back" %>
-    </section>
-
-  </article>
+  <section class = "row-section">
+    <%= render partial:"members/card_back" %>
+  </section>
+</article>
 

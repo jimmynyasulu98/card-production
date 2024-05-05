@@ -7,22 +7,22 @@
     <td><%= index.to_i+1 %></td>
     <td><%= student.member.first_name %></td>
     <td><%= student.member.last_name %></td>
-    <td><%= link_to student.member.membership_number ,edit_member_path(student.member.id),class:"text-primary mx-1" %></td>
+    <td><%= student.member.membership_number %></td>
     <td><%= student.member.date_of_birth %></td>
     <td class="d-flex">
 
         <% if student.member.card_printed %>
-            <%= button_to select_student_path(),params:{id: student.member.id }, class:"btn btn-outline-primary student-select mx-1" do %>
+            <%= button_to select_student_path(),params:{id: student.member.id, index: index }, class:"btn btn-outline-primary student-select mx-1" do %>
                 <i class="fa fa-print mb-3"></i>
             <% end %>
         <% else%>
-            <%= button_to select_student_path(),params:{id: student.member.id}, class:"btn btn-outline-danger student-select mx-1", data: {turbo_stream: true} do %>
+            <%= button_to select_student_path(),params:{id: student.member.id,index: index}, class:"btn btn-outline-danger student-select mx-1", data: {turbo_stream: true} do %>
                 <i class="fa fa-print mb-3"></i>
             <% end %>
         <% end %>
 
-        <%= button_to  mark_printed_manual_path(),params:{id: student.member.id, index: index  }, class:"btn btn-outline-dark student-select", data: {turbo_stream: true} do %>
-                <i class="fa fa-print mb-3"></i>
+        <%= link_to  edit_member_path(student.member.id), class:"btn btn-outline-dark student-select", data: {turbo_stream: true} do %>
+                <i class="fa fa-edit mb-3"></i>
         <% end %>
 
     </td>

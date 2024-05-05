@@ -1,5 +1,5 @@
 class StudentController < ApplicationController
-  protect_from_forgery with: :null_session
+  skip_before_action :verify_authenticity_token
   require 'csv'
   require 'creek'
   require 'zip'
@@ -64,57 +64,44 @@ class StudentController < ApplicationController
   end
 
   def select_student_list
-    @time = Time.now
+
     @students = StudentAcademicYear.where(academic_year_id:params[:academic_year], location_id:params[:location])
     render :index
   end
 
   def select_student
-    @time = Time.now
+
     respond_to do |format|
       @student = StudentAcademicYear.find_by(member_id:params[:id])
-      #setting student id into session cookie to be accessed in AJAX call
-      cookies[:student] = @student.member_id
+      #setting student id and corresponding index on UI student list into session cookie to be accessed in AJAX call
+
+      session[:student] = @student.member_id
+      session[:index] = params[:index]
       #@students = StudentAcademicYear.where(academic_year_id:@student.academic_year_id,location_id:@student.location_id)
       format.turbo_stream do
-        render turbo_stream: turbo_stream.replace( :card_section , partial:"members/card_section" ,locals: { student: @student, card: @card   } )
+        render turbo_stream: turbo_stream.replace(:card_section , partial:"members/card_section" ,locals:{ member: @student.member, card: @card} )
       end
       format.html { render :index }
     end
   end
 
-  def mark_printed_manual
+  def mark_printed
+    puts session.to_hash
+    puts params
 
-    member = Member.find(params[:id])
+    member = Member.find(session[:student])
     member.card_printed = true
     member.save
-    @student = StudentAcademicYear.find_by(member_id:params[:id])
-    @time = Time.now
+    @student = StudentAcademicYear.find_by(member_id: session[:student])
+
 
     respond_to do |format|
 
       format.turbo_stream do
         render  turbo_stream: turbo_stream.replace(:"student_#{@student.member_id}" ,
-          partial: 'student', locals: { student: @student, index: params[:index], fade_in: true } )
+          partial: 'student', locals: { student: @student, index: session[:index], fade_in: true } )
       end
-      format.html { render :index }
-    end
 
-  end
-
-  def mark_printed
-    member = Member.find(params[:csrftoken].split('student=')[1])
-    member.card_printed = true
-    member.save
-    @student = StudentAcademicYear.find_by(member_id: params[:csrftoken].split('student=')[1])
-    @time = Time.now
-
-    respond_to do |format|
-
-      format.turbo_stream do
-        puts "oksu"
-        render  turbo_stream: turbo_stream.replace(:new , partial: 'new', locals: { student: @time } )
-      end
       format.html { render :index }
     end
 

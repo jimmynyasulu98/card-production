@@ -1,14 +1,41 @@
-<p style="color: green"><%= notice %></p>
 
-<h1>Members</h1>
+<div class="row main-section dashboard">
 
-<div id="members">
-  <% @members.each do |member| %>
-    <%= render member %>
-    <p>
-      <%= link_to "Show this member", member %>
-    </p>
-  <% end %>
+  <!-- Left side columns -->
+    <div class="col-lg-7 left-column">
+        <div class="row">
+        <!-- Revenue Card -->
+            <div class="col-md-12">
+              <div class="card info-card revenue-card">
+                <div class="card-body">
+                    <h5 class="card-title d-flex justify-content-center mb-0">Datatables</h5>
+                    <p style="color: green"><%= notice %></p>
+                    <h1>Members</h1>
+                    <div id="members">
+                      <% @members.each do |member| %>
+                        <%= render member %>
+                        <p>
+                          <%= link_to "Show this member", member %>
+                        </p>
+                      <% end %>
+                    </div>
+
+                    <%= link_to "New member", new_member_path %>
+                </div>
+              </div>
+            </div><!-- Students list -->
+
+
+        </div>
+    </div><!-- End Left side columns -->
+
+  <!-- Right side columns -->
+  <div class="col-lg-4 right-column" >
+    <!-- Card  Section -->
+        <%= render partial:"card_section" , locals: { member: @member, card: @card }  %>
+        <%= button_tag "preview card" , id:"preview-card" ,class:"btn btn-primary my-2" %>
+    <!-- Card Section -->
+  </div>
+  <!-- End Right side columns -->
 </div>
 
-<%= link_to "New member", new_member_path %>

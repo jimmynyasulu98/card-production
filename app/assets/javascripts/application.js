@@ -4,6 +4,8 @@
 //= require main
 //= require print
 
+import "@hotwired/turbo-rails"
+import "./controllers"
 
 
 $(document).on('change', 'input[type="file"]' ,function(event) {
@@ -20,15 +22,16 @@ $(document).on('change', 'input[type="file"]' ,function(event) {
     reader.readAsDataURL(image);
   });
 
-
+/** Ajax call from print window to mark the card printed */
 window.onafterprint = function() {
   $.ajax({
     type: "POST",
     url: "mark-printed",
     data :  document.cookie,
-
+    /** render template view in the controller action */
+    success: function (res) {
+      Turbo.renderStreamMessage(res)
+    }
   });
 };
 
-import "@hotwired/turbo-rails"
-import "./controllers"

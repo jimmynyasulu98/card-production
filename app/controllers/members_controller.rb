@@ -1,5 +1,6 @@
 class MembersController < ApplicationController
   before_action :set_member, only: %i[ show edit update destroy ]
+  before_action :set_card, only: %i[new show edit update destroy ]
 
   # GET /members or /members.json
   def index
@@ -68,4 +69,9 @@ class MembersController < ApplicationController
     def member_params
       params.require(:member).permit(:membership_number ,:first_name, :last_name, :date_of_birth, :date_joined, :cover_id, :location_id, :image)
     end
+
+    def set_card
+      @card = Card.first()
+    end
+
 end

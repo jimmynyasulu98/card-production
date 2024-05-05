@@ -12,27 +12,27 @@
     <p class="label">Membership <br> Number</p>
     <span>&#10148;</span>
 
-    <input type="text" value=<%=student&.member&.membership_number%> class="id-number-input" disabled>
+    <input type="text" value=<%=member&.membership_number%> class="id-number-input" disabled>
 
     </div>
     <div class="profile-row">
-        <% if student&.member&.image %>
-        <%= image_tag student.member.image_url  , class: " id-photo" %>
+        <% if member&.image %>
+        <%= image_tag member.image_url  , class: " id-photo" %>
         <% else %>
         <img src="" class="id-photo">
         <% end %>
     <ul class="profile-fields">
         <li class="list-item">
         <h6 class="id-label">Surname  &#x3A;</h6>
-        <h6 class="id-value "><%= student&.member&.last_name %></h6>
+        <h6 class="id-value "><%= member&.last_name %></h6>
         </li>
         <li class="list-item">
         <h6 class="id-label ">first name  &#x3A;</h6>
-        <h6 class="id-value "><%= student&.member&.first_name %></h6>
+        <h6 class="id-value "><%= member&.first_name %></h6>
         </li>
         <li class="list-item">
         <h6 class="id-label">Date of birth &#x3A;</h6>
-        <h6 class="id-value "><%= student&.member&.date_of_birth %></h6>
+        <h6 class="id-value "><%= member&.date_of_birth %></h6>
         </li>
         <li class="list-item">
         <h6 class="id-label">Date Joined  &#x3A;</h6>
